@@ -1,4 +1,4 @@
-module.exports = function(responseObject,templateName){
+module.exports = function(templateName,responseObject){
     /*
 
         Set response object and the template name
@@ -14,6 +14,6 @@ module.exports = function(responseObject,templateName){
 module.exports.prototype = {
     name:"Base View",
     render: function(data) {
-        return this.res.render(this.templateName,data)
+        return this.responseObject.render(this.templateName,data)
     }
 }
