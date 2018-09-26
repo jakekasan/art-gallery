@@ -36,25 +36,33 @@ describe("base.controller",() => {
             bc.run.should.be.a("function");
         });
 
-        it("object.run should call a res function", () => {
+        it("object.run should call a res function", (done) => {
             let bc = require("./../../controllers/base.controller.js");
 
+            let req = {
+                connection:true
+            }
+
             let res = {
-                ranFunction:false,
+                ranFunction: function(){
+                    assert(true);
+                    done();
+                },
                 render:function(){
-                    self.ranFunction = true;
+                    this.ranFunction();
                 },
                 json:function(){
-                    self.ranFunction = true;
+                    this.ranFunction();
                 },
                 sendStatus:function(){
-                    self.ranFunction = true;
+                    this.ranFunction();
                 }
             }
 
-            bc.run(null,res,null);
+            bc.run(req,res,null);
 
-            assert(res.ranFunction === true);
+            //assert(res.ranFunction === true);
+            //res.ranFunction.should.equal(true);
         })
     });
 
