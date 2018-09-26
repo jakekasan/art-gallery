@@ -51,5 +51,26 @@ describe("index.spec.js",() => {
 
             config.server.should.have.property("port");
         });
+    });
+
+    describe("local settings", () => {
+
+        it("importing module with 'local' should return 'local' config", () => {
+            let config = require("./../../config/index")("local");
+
+            config.name.should.be.equal("local");
+        });
+
+        it("'local' config address should be 'http://localhost'", () => {
+            let config = require("./../../config/index")("local");
+
+            config.server.address.should.be.equal("http://localhost");
+        });
+
+        it("'local' config port should be 8000", () => {
+            let config = require("./../../config/index")("local");
+
+            config.server.port.should.be.equal(8000);
+        });
     })
 })
